@@ -2,11 +2,16 @@
 
 #include <cstdint>
 
-void TelemetryBlackBox::onRocketStateChange(RocketState state) {}
+void TelemetryBlackBox::onRocketStateChange(RocketState state) {
+  currState = state;
+}
 
-void TelemetryBlackBox::onParachuteDeployed() {}
+void TelemetryBlackBox::onParachuteDeployed() { parachute = true; }
 
-void TelemetryBlackBox::onBaroReading(bool error, uint16_t value) {}
+void TelemetryBlackBox::onBaroReading(bool error, uint16_t value) {
+  baroError = error;
+  altitude = value;
+}
 
 void TelemetryBlackBox::recordCurrentState() {}
 
