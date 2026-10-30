@@ -33,4 +33,13 @@ public:
    * 0xFFFFFFFF jeśli suma kontrolna jest niepoprawna.
    */
   uint32_t getLastDataframe();
+
+private:
+  static constexpr int BUFFER_SIZE = 16;
+
+  RocketState currState = DISARM;
+  bool parachute = false;
+  bool baroError = false;
+  uint16_t altitude = 0;
+  uint32_t buffer[BUFFER_SIZE] = {};
 };
