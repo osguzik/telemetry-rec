@@ -15,11 +15,13 @@ fetchcontent_declare(
   googletest
   URL https://github.com/google/googletest/archive/refs/tags/v1.18.0.zip
 )
+set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
 fetchcontent_makeavailable(googletest)
 
 enable_testing()
 
 add_executable(tests tests/RingBufferTest.cpp tests/TelemetryBlackBoxTest.cpp)
+target_compile_options(tests PRIVATE -Wall -Wextra -Wpedantic)
 target_link_libraries(tests PRIVATE telemetry-rec GTest::gtest_main)
 
 include(GoogleTest)
