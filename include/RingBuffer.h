@@ -10,7 +10,7 @@ public:
     }
   }
 
-  T last() const { return slots[(head - 1) % Capacity]; }
+  T last() const { return slots[(head + Capacity - 1) % Capacity]; }
 
   bool empty() const { return count == 0; }
 
