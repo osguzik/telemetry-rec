@@ -7,8 +7,11 @@ Telemetry recorder (black box). Packs state into 32-bit frames and stores the la
 ```
 cmake -S . -B build
 cmake --build build
-cd build && ctest
 ```
+
+Run tests with CTest: `cd build && ctest`
+
+Or run the test binary directly: `./build/tests`
 
 ## Structure
 
@@ -23,4 +26,4 @@ cd build && ctest
 
 ## References
 - [Creating a Circular Buffer in C and C++](https://embeddedartistry.com/blog/2017/05/17/creating-a-circular-buffer-in-c-and-c/)
-- [Quickstart: Building with CMake](https://google.github.io/googletest/quickstart-cmake.html) (GTest)
+- [Quickstart: Building with CMake](https://google.github.io/googletest/quickstart-cmake.html) (GoogleTest)
