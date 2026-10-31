@@ -38,4 +38,9 @@ void TelemetryBlackBox::recordCurrentState() {
   frame |= uint32_t(checksum(frame)) << 24;
 }
 
-uint32_t TelemetryBlackBox::getLastDataframe() {}
+uint32_t TelemetryBlackBox::getLastDataframe() {
+  // empty history is treated the same as an invalid checksum
+  if (history.empty()) {
+    return 0xFFFFFFFF;
+  }
+}

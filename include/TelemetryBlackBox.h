@@ -1,4 +1,7 @@
 #pragma once
+
+#include "RingBuffer.h"
+
 #include <cstdint>
 
 enum RocketState : uint8_t {
@@ -41,5 +44,6 @@ private:
   bool parachute = false;
   bool baroError = false;
   uint16_t altitude = 0;
-  uint32_t buffer[BUFFER_SIZE] = {};
+
+  RingBuffer<uint32_t, BUFFER_SIZE> history;
 };
