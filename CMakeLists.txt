@@ -9,3 +9,18 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_library(telemetry-rec src/TelemetryBlackBox.cpp)
 target_include_directories(telemetry-rec PUBLIC include)
 target_compile_options(telemetry-rec PRIVATE -Wall -Wextra -Wpedantic)
+
+include(FetchContent)
+fetchcontent_declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/tags/v1.18.0.zip
+)
+fetchcontent_makeavailable(googletest)
+
+enable_testing()
+
+add_executable(tests tests/RingBufferTest.cpp)
+target_link_libraries(tests PRIVATE telemetry-rec GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(tests)
