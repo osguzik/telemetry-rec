@@ -19,7 +19,7 @@ fetchcontent_makeavailable(googletest)
 
 enable_testing()
 
-add_executable(tests tests/RingBufferTest.cpp)
+add_executable(tests tests/RingBufferTest.cpp tests/TelemetryBlackBoxTest.cpp)
 target_link_libraries(tests PRIVATE telemetry-rec GTest::gtest_main)
 
 include(GoogleTest)
