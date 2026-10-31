@@ -67,3 +67,11 @@ TEST(TelemetryBlackBoxTest, LandedZeroAltitude) {
   recorder.recordCurrentState();
   EXPECT_EQ(recorder.getLastDataframe(), 0x04000004);
 }
+
+TEST(TelemetryBlackBoxTest, BaroErrorOverridesLanded) {
+  TelemetryBlackBox recorder;
+  recorder.onRocketStateChange(LANDED);
+  recorder.onBaroReading(true, 500);
+  recorder.recordCurrentState();
+  EXPECT_EQ(recorder.getLastDataframe(), 0x14FFFF14);
+}
