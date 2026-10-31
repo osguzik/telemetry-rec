@@ -36,11 +36,21 @@ void TelemetryBlackBox::recordCurrentState() {
   uint32_t frame = currState | (parachute << 3) | (baroError << 4) |
                    (uint32_t(frameAltitude) << 8);
   frame |= uint32_t(checksum(frame)) << 24;
+
+  history.put(frame);
 }
 
 uint32_t TelemetryBlackBox::getLastDataframe() {
   // empty history is treated the same as an invalid checksum
   if (history.empty()) {
+    return 0xFFFFFFFF;
+  }
+
+  uint32_t frame = history.last();
+
+  uint8_t frameChecksum = frame >> 24;
+  uint8_t expectedChecksum = checksum(frame);
+  if (frameChecksum != expectedChecksum) {
     return 0xFFFFFFFF;
   }
 }
